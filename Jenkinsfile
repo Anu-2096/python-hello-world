@@ -8,7 +8,7 @@ pipeline {
                 script {
                     echo 'Building the application...'
                     sh 'python3 -m venv venv'
-                    sh 'venv/Scripts/activate && pip install -r requirements.txt'  // For Windows
+                    sh '. venv/Scripts/activate && pip install -r requirements.txt'  // For Windows
                     // sh 'source venv/bin/activate && pip install -r requirements.txt'  // For Linux/Mac
                 }
             }
@@ -19,7 +19,7 @@ pipeline {
                 // Run unit tests using pytest
                 script {
                     echo 'Running unit tests...'
-                    sh 'venv/Scripts/activate && pytest tests'  // For Windows
+                    sh '. venv/Scripts/activate && pytest tests'  // For Windows
                     // sh 'source venv/bin/activate && pytest tests'  // For Linux/Mac
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
                 // Integrate a code analysis tool, e.g., Flake8
                 script {
                     echo 'Running code analysis...'
-                    sh 'venv/Scripts/activate && flake8 app'  // For Windows
+                    sh '. venv/Scripts/activate && flake8 app'  // For Windows
                     // sh 'source venv/bin/activate && flake8 app'  // For Linux/Mac
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
                 // Perform a security scan using Bandit
                 script {
                     echo 'Running security scan...'
-                    sh 'venv/Scripts/activate && bandit -r app'  // For Windows
+                    sh '. venv/Scripts/activate && bandit -r app'  // For Windows
                     // sh 'source venv/bin/activate && bandit -r app'  // For Linux/Mac
                 }
             }
@@ -62,7 +62,7 @@ pipeline {
                 // Run integration tests on the staging environment
                 script {
                     echo 'Running integration tests on staging...'
-                    sh 'venv/Scripts/activate && pytest tests/integration_tests'  // For Windows
+                    sh '. venv/Scripts/activate && pytest tests/integration_tests'  // For Windows
                     // sh 'source venv/bin/activate && pytest tests/integration_tests'  // For Linux/Mac
                 }
             }
