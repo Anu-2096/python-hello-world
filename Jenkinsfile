@@ -7,7 +7,7 @@ pipeline {
                 // Use a build automation tool, e.g., setup virtual environment and install requirements
                 script {
                     echo 'Building the application...'
-                    sh 'python -m venv venv'
+                    sh 'python3 -m venv venv'
                     sh 'venv/Scripts/activate && pip install -r requirements.txt'  // For Windows
                     // sh 'source venv/bin/activate && pip install -r requirements.txt'  // For Linux/Mac
                 }
