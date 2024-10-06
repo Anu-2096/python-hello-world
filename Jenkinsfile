@@ -9,7 +9,7 @@ pipeline {
                     sh 'python3 -m venv venv'
                     sh '''
                         . venv/bin/activate
-                        pip install -r requirements.txt || exit 1  // Fail if requirements installation fails
+                        pip install -r requirements.txt  // Install requirements
                         pip install pytest flake8 bandit  // Ensure testing and analysis tools are installed
                         pip list  // Verify installed packages
                     '''
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running unit tests...'
-                    sh '. venv/bin/python -m pytest tests'  // Directly call pytest without sourcing activate
+                    sh '. venv/bin/python -m pytest tests'
                 }
             }
         }
