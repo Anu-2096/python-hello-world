@@ -6,12 +6,12 @@ pipeline {
             steps {
                 script {
                     echo 'Building the application...'
-                    sh 'python3 -m venv venv'
                     sh '''
+                        python3 -m venv venv
                         . venv/bin/activate
-                        pip install -r requirements.txt  // Install requirements
-                        pip install pytest flake8 bandit  // Ensure testing and analysis tools are installed
-                        pip list  // Verify installed packages
+                        pip install -r requirements.txt  # Install requirements
+                        pip install pytest flake8 bandit  # Ensure testing and analysis tools are installed
+                        pip list  # Verify installed packages
                     '''
                 }
             }
