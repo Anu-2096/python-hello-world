@@ -82,16 +82,30 @@ pipeline {
         }
     }
 
-    post {
+        post {
+        always {
+            // Archive the logs for attaching to the email
+            archiveArtifacts artifacts: '*.log', allowEmptyArchive: true
+        }
         success {
-            mail to: 'anushri20sept@gmail.com',
-                 subject: "Jenkins: Build ${currentBuild.fullDisplayName} - Success",
-                 body: "The build was successful!\nCheck the details at ${env.BUILD_URL}"
+            emailext(
+                to: 'anushri20sept@gmail.com',
+                subject: "Jenkins: Build ${currentBuild.fullDisplayName} - SUCCESS",
+                body: """The build was successful!
+                        Check the details at ${env.BUILD_URL}
+                        Attached are the logs for reference.""",
+                attachmentsPattern: '*.log' //Attach the logs
+            )
         }
         failure {
-            mail to: 'anushri20sept@gmail.com',
-                 subject: "Jenkins: Build ${currentBuild.fullDisplayName} - Failed",
-                 body: "The build has failed.\nCheck the details at ${env.BUILD_URL}"
+            emailext(
+                to: 'anushri20sept@gmail.com',
+                subject: "Jenkins: Build ${currentBuild.fullDisplayName} - FAILURE",
+                body: """The build failed.
+                        Check the details at ${env.BUILD_URL}
+                        Attached are the logs for further investigation.""",
+                attachmentsPattern: '*.log' //sAttach the logs
+            )
         }
     }
 }
