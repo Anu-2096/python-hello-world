@@ -67,7 +67,7 @@ pipeline {
                     echo 'Running integration tests on staging...'
                     sh '''
                         . venv/bin/activate  # Activate virtual environment
-                        python -m pytest tests/integration_tests
+                        python -m pytest tests/
                     '''
                 }
             }
