@@ -21,7 +21,10 @@ pipeline {
             steps {
                 script {
                     echo 'Running unit tests...'
-                    sh '. venv/bin/python -m pytest tests'
+                    sh '''
+                        . venv/bin/activate  # Activate virtual environment
+                        python -m pytest tests
+                    '''
                 }
             }
         }
@@ -30,7 +33,10 @@ pipeline {
             steps {
                 script {
                     echo 'Running code analysis...'
-                    sh '. venv/bin/python -m flake8 app'
+                    sh '''
+                        . venv/bin/activate  # Activate virtual environment
+                        python -m flake8 app
+                    '''
                 }
             }
         }
@@ -39,7 +45,10 @@ pipeline {
             steps {
                 script {
                     echo 'Running security scan...'
-                    sh '. venv/bin/python -m bandit -r app'
+                    sh '''
+                        . venv/bin/activate  # Activate virtual environment
+                        python -m bandit -r app
+                    '''
                 }
             }
         }
@@ -56,7 +65,10 @@ pipeline {
             steps {
                 script {
                     echo 'Running integration tests on staging...'
-                    sh '. venv/bin/python -m pytest tests/integration_tests'
+                    sh '''
+                        . venv/bin/activate  # Activate virtual environment
+                        python -m pytest tests/integration_tests
+                    '''
                 }
             }
         }
